@@ -8,49 +8,85 @@
 */
 
 //array of words
-const words = [
-  "jump",
-  "fast",
-  "blue",
-  "code",
-  "type",
-  "game",
-  "quiz",
-  "road",
-  "frog",
-  "lamp",
-  "keyboard",
-  "monitor",
-  "browser",
-  "window",
-  "button",
-  "capture",
-  "picture",
-  "playing",
-  "scroll",
-  "loading",
-  "awkward",
-  "rhythm",
-  "zombie",
-  "jazzman",
-  "subtle",
-  "pythonic",
-  "glimpse",
-  "vortex",
-  "phantom",
-  "whisper",
+const easyWords = [
+  "cat",
+  "dog",
+  "sun",
+  "run",
+  "big",
+  "red",
+  "fun",
+  "hat",
+  "pen",
+  "cup",
+  "leg",
+  "box",
+  "toy",
+  "key",
+  "map",
+  "zoo",
+  "jam",
+  "fox",
+  "egg",
+  "ant",
+];
+const normalWords = [
+  "apple",
+  "happy",
+  "water",
+  "house",
+  "music",
+  "table",
+  "phone",
+  "light",
+  "paper",
+  "plant",
+  "smile",
+  "clock",
+  "bread",
+  "river",
+  "chair",
+  "cloud",
+  "grass",
+  "pizza",
+  "tiger",
+  "watch",
+];
+const hardWords = [
+  "xylophone",
+  "algorithm",
+  "quicksand",
+  "phenomenon",
+  "entrepreneur",
+  "bureaucracy",
+  "photosynthesis",
+  "juxtaposition",
+  "schizophrenia",
+  "questionnaire",
+  "cryptocurrency",
+  "extraterrestrial",
+  "incomprehensible",
+  "metamorphosis",
+  "procrastinate",
+  "rendezvous",
+  "silhouette",
+  "treacherous",
+  "ventilation",
+  "whimsical",
 ];
 
-//setting levels
+// Game settings
 const lvls = {
-  Easy: 5,
+  Easy: 2,
   Normal: 3,
-  Hard: 2,
+  Hard: 4,
 };
 
-//default level
-let defaultLevelName = "Hard"; //change level from here
-let defaultLevelSeconds = lvls[defaultLevelName];
+const wordsByLevel = {
+  Easy: [...easyWords],
+  Normal: [...normalWords],
+  Hard: [...hardWords],
+};
 
 //catch selectors
 let startButton = document.querySelector(".start");
@@ -63,12 +99,30 @@ let timeLeftSpan = document.querySelector(".time span");
 let scoreGot = document.querySelector(".score .got");
 let scoreTotal = document.querySelector(".score .total");
 let finishMessage = document.querySelector(".finish");
+let selectDifficulty = document.getElementById("selectDifficulty");
 
-//setting level name + seconds + score
-lvlNameSpan.innerHTML = defaultLevelName;
-secondsSpan.innerHTML = defaultLevelSeconds;
-timeLeftSpan.innerHTML = defaultLevelSeconds;
-scoreTotal.innerHTML = words.length;
+// Current words array that will change based on selection
+let words = [...wordsByLevel.Easy]; // Start with easy words
+
+// When difficulty changes
+selectDifficulty.addEventListener("change", function () {
+  currentLevelName = this.value;
+  currentLevelSeconds = lvls[currentLevelName];
+
+  // Update the words array based on selection
+  words = [...wordsByLevel[currentLevelName]];
+
+  // Update displays
+  lvlNameSpan.innerHTML = currentLevelName;
+  secondsSpan.innerHTML = currentLevelSeconds;
+  timeLeftSpan.innerHTML = currentLevelSeconds;
+
+  // Reset game state
+  finishMessage.innerHTML = "";
+  input.value = "";
+  scoreGot.innerHTML = "0";
+  scoreTotal.innerHTML = words.length;
+});
 
 //disable paste
 input.onpaste = function () {
@@ -106,7 +160,7 @@ function genWords() {
 }
 
 function startPlay() {
-  timeLeftSpan.innerHTML = defaultLevelSeconds;
+  timeLeftSpan.innerHTML = currentLevelSeconds;
   let start = setInterval(() => {
     timeLeftSpan.innerHTML--;
     if (timeLeftSpan.innerHTML === "0") {
