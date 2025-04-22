@@ -11,26 +11,32 @@
     <link rel="stylesheet" href="css/all.min.css" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <title>Document</title>
+    <title>Type Speed</title>
   </head>
   <body>
     <div class="game">
-      <div class="name">Typing Speed Test Game</div>
+      <div class="name">Typing Speed Test</div>
       <div class="container">
         <div class="message">
-          You Are Playing On
-          <span class="lvl"></span> Level &amp; You have
-          <span class="seconds"></span> Seconds To Type The Word
+          <div class="message-box1">
+            You Are Playing On <span class="lvl"></span> Level, You have
+            <span class="seconds"></span> Seconds To Type The Word.
+          </div>
+          <div class="message-box2">
+            Select your difficulty:
+            <select id="selectDifficulty">
+              <option value="Easy">Easy</option>
+              <option value="Normal">Normal</option>
+              <option value="Hard">Hard</option>
+            </select>
+          </div>
         </div>
         <div class="start">Start Playing</div>
         <div class="the-word"></div>
         <input type="text" class="input" />
-        <div class="upcoming-words">
-          <div>Apple</div>
-          <div>Krm</div>
-        </div>
+        <div class="upcoming-words"></div>
         <div class="control">
-          <div class="time">Time Left: <span></span> Seconds</div>
+          <div class="time">Time Left: <span>3</span> Seconds</div>
           <div class="score">
             Score: <span class="got">0</span> From <span class="total"></span>
           </div>

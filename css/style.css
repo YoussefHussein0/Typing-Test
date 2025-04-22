@@ -16,11 +16,11 @@ html {
 }
 
 body {
+    background-color: #eee;
     font-family: "Open Sans", sans-serif;
 }
 
 .game {
-    background-color: #eee;
     min-width: 100vh;
 }
 
@@ -44,6 +44,15 @@ body {
     margin: 15px 0;
     border-radius: 6px;
     text-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.message-box2 select {
+    border: 2px solid #ddd;
+    background: #eee;
+    padding: 5px;
+    transition: 0.4s;
 }
 
 .message span {
@@ -67,6 +76,11 @@ body {
     cursor: pointer;
     color: white;
     padding: 20px;
+}
+
+.start:hover {
+    background-color: #2a85cf;
+    transition: 0.4s;
 }
 
 .the-word {
